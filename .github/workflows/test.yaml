@@ -1,7 +1,11 @@
 name: CI to Docker Hub
 on:
   push:
-    branches: [ main ]
+    branches: [ main, feature/test ]
+
+  pull_request:
+    branches:
+      - main
 
 jobs:
   build:
@@ -67,7 +71,21 @@ jobs:
           push: true
           tags:  ${{ secrets.DOCKER_HUB_USERNAME }}/test:latest
           cache-from: type=local,src=/tmp/.buildx-cache
+<<<<<<< Updated upstream
           cache-to: type=local,dest=/tmp/.buildx-cache
           
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
+=======
+          cache-to: type=local,dest=/tmp/.buildx-cache-new,mode=max
+
+      - name: 파일목록
+        run: ls -la
+      - name: 이미지 목록
+        run: docker images
+
+      - name: Move cache
+        run: |
+          rm -rf /tmp/.buildx-cache
+          mv /tmp/.buildx-cache-new /tmp/.buildx-cache
+>>>>>>> Stashed changes
