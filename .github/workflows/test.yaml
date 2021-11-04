@@ -7,7 +7,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    
       - name: Check Out Repo 
         uses: actions/checkout@v2
 
@@ -55,7 +54,7 @@ jobs:
           file: ./Dockerfile
           builder: ${{ steps.buildx.outputs.name }}
           push: true
-          tags:  ${{ secrets.DOCKER_HUB_USERNAME }}/simplewhale:latest
+          tags:  ${{ secrets.DOCKER_HUB_USERNAME }}/test:latest
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
           
