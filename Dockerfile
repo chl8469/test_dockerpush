@@ -1,7 +1,5 @@
-FROM python:3.8
+FROM hl8469/mlops-project:base-image-1.0
 
 COPY . /
-
-RUN /install_pkgs.sh
 
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000", "--workers", "3"]
